@@ -72,7 +72,6 @@ public class MainProcesses {
                     result.setRGB(j, i, imageData[i][j]);
                 }
             }
-            
             File output = new File(fileName);
             ImageIO.write(result, "jpg", output);
             
@@ -110,4 +109,5 @@ public class MainProcesses {
                     System.out.println("The image is not large enough to extract 9 pixels from the top left corner");
 		}
 	}
-}
+
+    }
