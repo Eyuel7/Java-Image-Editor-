@@ -20,14 +20,17 @@ public class ImageEditor {
 
   
     public static void main(String[] args) {
-       
-        System.out.println("What Do you want to do? ");
         
+        System.out.println("****************************************************");
+        
+        System.out.println("What Do you want to do? ");
         System.out.print("1. Trim the borders of the image        ");
         System.out.println("2. Show negative color of Image");
-        System.out.print("3. Stretch Horizontally      ");
+        System.out.print("3. Stretch Horizontally                 ");
         System.out.println("4. Shrink Vertically");
         System.out.println("5. Invert the image");
+        
+        System.out.println("****************************************************");
         
         Scanner scan = new Scanner(System.in);
         int input = scan.nextInt();
