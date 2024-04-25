@@ -21,6 +21,10 @@ public class ImageEditor {
   
     public static void main(String[] args) {
         
+        System.out.println("Enter in the location of the image");
+        Scanner stringScan = new Scanner(System.in);
+        String locInput = stringScan.next();
+        
         System.out.println("****************************************************");
         
         System.out.println("What Do you want to do? ");
@@ -35,32 +39,33 @@ public class ImageEditor {
         Scanner scan = new Scanner(System.in);
         int input = scan.nextInt();
         
-        int[][] imageData = MainProcesses.imageToTwoD("C:\\Users\\eyuel\\Documents\\NetBeansProjects\\Image Editor\\src\\image\\editor\\Images\\dog.jpg");
+        int[][] imageData = MainProcesses.imageToTwoD(locInput);
+        String finalLocation = pathModifier(locInput);
         
         switch(input){
             case 1:
                 int[][] trimmed = trimBorders(imageData, 60);
-                MainProcesses.twoDToImage(trimmed, "C:\\Users\\eyuel\\Documents\\NetBeansProjects\\Image Editor\\src\\image\\editor\\Images\\trimmed.jpg");
+                MainProcesses.twoDToImage(trimmed, finalLocation.concat("trimmed.jpg"));
                 break;
              
             case 2:
                 int[][] negative = negativeColor(imageData);
-                MainProcesses.twoDToImage(negative, "C:\\Users\\eyuel\\Documents\\NetBeansProjects\\Image Editor\\src\\image\\editor\\Images\\negative.jpg");
+                MainProcesses.twoDToImage(negative, finalLocation.concat("negative.jpg"));
                 break;
                 
             case 3:
                 int[][] stretchImageHorizontally = stretchHorizontally(imageData);
-                MainProcesses.twoDToImage(stretchImageHorizontally, "C:\\Users\\eyuel\\Documents\\NetBeansProjects\\Image Editor\\src\\image\\editor\\Images\\stretched.jpg");
+                MainProcesses.twoDToImage(stretchImageHorizontally, finalLocation.concat("stretched.jpg"));
                 break;
                 
             case 4:
                 int[][] shrinkImageVertically = shrinkVertically(imageData);
-                MainProcesses.twoDToImage(shrinkImageVertically, "C:\\Users\\eyuel\\Documents\\NetBeansProjects\\Image Editor\\src\\image\\editor\\Images\\shrunk.jpg");
+                MainProcesses.twoDToImage(shrinkImageVertically, finalLocation.concat("shrunk.jpg"));
                 break;
         
             case 5:
                 int[][] invertedImage = invertImage(imageData);
-                MainProcesses.twoDToImage(invertedImage, "C:\\Users\\eyuel\\Documents\\NetBeansProjects\\Image Editor\\src\\image\\editor\\Images\\inverted.jpg");
+                MainProcesses.twoDToImage(invertedImage, finalLocation.concat("inverted.jpg"));
                 break;
                
               }
@@ -159,6 +164,22 @@ public class ImageEditor {
         }
         
         return invertedImage;
+    }
+    
+    public static String pathModifier(String input){
+        
+        char[] inputChar = input.toCharArray();
+                StringBuilder sb = new StringBuilder();
+                sb.append(input);
+                for(int i=inputChar.length-1; i>=0; i--){
+                    if(inputChar[i] == ('\\')){
+                        break;
+                    }
+                    sb.deleteCharAt(i);
+                }
+                inputChar = sb.toString().toCharArray();
+                String finalLocation = String.valueOf(inputChar);
+                return finalLocation;
     }
     
     public static int[] getRGBAFromPixel(int pixelColorValue){
